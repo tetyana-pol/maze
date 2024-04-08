@@ -1,0 +1,36 @@
+.row {
+  display: flex;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+}
+
+.wall {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+}
+
+.player-one {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: yellow;
+}
+
+.player-two {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: green;
+}
+
+.hidden {
+  display: none;
+}
