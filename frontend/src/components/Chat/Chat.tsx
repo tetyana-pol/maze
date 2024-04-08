@@ -62,7 +62,7 @@ export const Chat = () => {
   return (
     <div className="container-chat">
       {messages.map((message: MessageType) => (
-        <p>{message.text}</p>
+        <p key={message.id}>{message.text}</p>
       ))}
       <form
         onSubmit={(e) => {

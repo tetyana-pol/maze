@@ -24,7 +24,7 @@ export const WaitingList = () => {
         {lists?.map((list: ListType) => (
           <li key={list.initializer}>
             <span className="waiting_item">{list.initializer}</span>
-            <span className="waiting_item">{list.date.toDateString()}</span>
+            <span className="waiting_item">{list.date}</span>
             <button
               type="button"
               className="button-app"

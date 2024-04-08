@@ -20,7 +20,7 @@ export const Dashbord = () => {
       addList({
         id: nextNumber(lists.map((el: ListType) => el.id)),
         initializer: userOne,
-        date: new Date(),
+        date: new Date().toISOString(),
       })
     );
     setIsDisabled(true);
@@ -29,9 +29,9 @@ export const Dashbord = () => {
   const getDiff = () => {
     const milliDiff: number =
       new Date().getTime() -
-      lists
-        .filter((list: ListType) => list.initializer === userOne)[0]
-        .date.getTime();
+      new Date(
+        lists.filter((list: ListType) => list.initializer === userOne)[0].date
+      ).getTime();
     const totalSeconds = Math.floor(milliDiff / 1000);
     const totalMinutes = Math.floor(totalSeconds / 60);
     const totalHours = Math.floor(totalMinutes / 60);

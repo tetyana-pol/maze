@@ -1,8 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
 import { CoordType } from "../../types/Coord";
+import { maze } from "../../components/Maze/maze.template";
 
-const lengthMaze = 8;
+const lengthMaze = maze.length;
+
+const checkForWall = (x: number, y: number) =>
+  x === -1 ||
+  y === -1 ||
+  x >= maze[y].length ||
+  y >= maze.length ||
+  maze[y][x] === "w";
+
+const checkForExit = () => {};
 
 export type PlayersState = {
   playerOne: CoordType;
@@ -21,7 +31,22 @@ export const playersSlice = createSlice({
   initialState,
   reducers: {
     moveLeft: (state) => {
-      if (state.currentPlayer === "playerOne") {
+      const currentPositionX = state[state.currentPlayer].positionX;
+
+      const currentPositionY = state[state.currentPlayer].positionY;
+
+      const newPositionX = currentPositionX - 1;
+
+      console.log({ newPositionX, currentPositionY });
+
+      if (checkForWall(newPositionX, currentPositionY)) {
+        console.log(`${state.currentPlayer} hit the wall`);
+        return;
+      }
+
+      state[state.currentPlayer].positionX = newPositionX;
+
+      /* if (state.currentPlayer === "playerOne") {
         if (state.playerOne.positionX - 1 >= 0) {
           state.playerOne.positionX = state.playerOne.positionX - 1;
         }
@@ -29,11 +54,26 @@ export const playersSlice = createSlice({
         if (state.playerTwo.positionX - 1 >= 0) {
           state.playerTwo.positionX = state.playerTwo.positionX - 1;
         }
-      }
+      } */
     },
 
     moveRight: (state) => {
-      if (state.currentPlayer === "playerOne") {
+      const currentPositionX = state[state.currentPlayer].positionX;
+
+      const currentPositionY = state[state.currentPlayer].positionY;
+
+      const newPositionX = currentPositionX + 1;
+
+      console.log({ newPositionX, currentPositionY });
+
+      if (checkForWall(newPositionX, currentPositionY)) {
+        console.log(`${state.currentPlayer} hit the wall`);
+        return;
+      }
+
+      state[state.currentPlayer].positionX = newPositionX;
+
+      /* if (state.currentPlayer === "playerOne") {
         if (state.playerOne.positionX + 1 < lengthMaze) {
           state.playerOne.positionX = state.playerOne.positionX + 1;
         }
@@ -41,11 +81,26 @@ export const playersSlice = createSlice({
         if (state.playerTwo.positionX + 1 < lengthMaze) {
           state.playerTwo.positionX = state.playerTwo.positionX + 1;
         }
-      }
+      } */
     },
 
     moveUp: (state) => {
-      if (state.currentPlayer === "playerOne") {
+      const currentPositionX = state[state.currentPlayer].positionX;
+
+      const currentPositionY = state[state.currentPlayer].positionY;
+
+      const newPositionY = currentPositionY - 1;
+
+      console.log({ currentPositionX, currentPositionY });
+
+      if (checkForWall(currentPositionX, newPositionY)) {
+        console.log(`${state.currentPlayer} hit the wall`);
+        return;
+      }
+
+      state[state.currentPlayer].positionY = newPositionY;
+
+      /* if (state.currentPlayer === "playerOne") {
         if (state.playerOne.positionY - 1 >= 0) {
           state.playerOne.positionY = state.playerOne.positionY - 1;
         }
@@ -53,11 +108,26 @@ export const playersSlice = createSlice({
         if (state.playerTwo.positionY - 1 >= 0) {
           state.playerTwo.positionY = state.playerTwo.positionY - 1;
         }
-      }
+      } */
     },
 
     moveDown: (state) => {
-      if (state.currentPlayer === "playerOne") {
+      const currentPositionX = state[state.currentPlayer].positionX;
+
+      const currentPositionY = state[state.currentPlayer].positionY;
+
+      const newPositionY = currentPositionY + 1;
+
+      console.log({ currentPositionX, currentPositionY });
+
+      if (checkForWall(currentPositionX, newPositionY)) {
+        console.log(`${state.currentPlayer} hit the wall`);
+        return;
+      }
+
+      state[state.currentPlayer].positionY = newPositionY;
+
+      /* if (state.currentPlayer === "playerOne") {
         if (state.playerOne.positionY + 1 < lengthMaze) {
           state.playerOne.positionY = state.playerOne.positionY + 1;
         }
@@ -65,7 +135,7 @@ export const playersSlice = createSlice({
         if (state.playerTwo.positionY + 1 < lengthMaze) {
           state.playerTwo.positionY = state.playerTwo.positionY + 1;
         }
-      }
+      } */
     },
 
     switchPlayer: (state) => {
