@@ -29,26 +29,30 @@ export const Chat = () => {
       case "/up":
         dispatch(moveUp());
         dispatch(switchPlayer());
+        dispatch(createMessage(textValue));
         setTextValue("");
         return;
       case "/down":
         dispatch(moveDown());
         dispatch(switchPlayer());
+        dispatch(createMessage(textValue));
         setTextValue("");
         return;
       case "/left":
         dispatch(moveLeft());
         dispatch(switchPlayer());
+        dispatch(createMessage(textValue));
         setTextValue("");
         return;
       case "/right":
         dispatch(moveRight());
         dispatch(switchPlayer());
+        dispatch(createMessage(textValue));
         setTextValue("");
         return;
     }
 
-    dispatch(createMessage(textValue));
+    dispatch(createMessage(currentUser + ": " + textValue));
   };
 
   useEffect(() => {
@@ -58,9 +62,7 @@ export const Chat = () => {
   return (
     <div className="container-chat">
       {messages.map((message: MessageType) => (
-        <p>
-          {currentUser}: {message.text}
-        </p>
+        <p>{message.text}</p>
       ))}
       <form
         onSubmit={(e) => {
