@@ -3,11 +3,18 @@ import { chatSelector } from "../../store/features/chatSlice";
 import { usersSelector } from "../../store/features/usersSlice";
 import "./chat.scss";
 import { getMessages, createMessage } from "../../store/features/chatSlice";
+import {
+  moveLeft,
+  moveRight,
+  moveUp,
+  moveDown,
+  switchPlayer,
+} from "../../store/features/playersSlice";
 import { useEffect, useState } from "react";
 import { MessageType } from "../../types/Message";
 
 export const Chat = () => {
-  const [textValue, setTextValu] = useState("");
+  const [textValue, setTextValue] = useState("");
 
   const { currentUser } = useAppSelector(usersSelector);
 
@@ -17,6 +24,30 @@ export const Chat = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    switch (textValue) {
+      case "/up":
+        dispatch(moveUp());
+        dispatch(switchPlayer());
+        setTextValue("");
+        return;
+      case "/down":
+        dispatch(moveDown());
+        dispatch(switchPlayer());
+        setTextValue("");
+        return;
+      case "/left":
+        dispatch(moveLeft());
+        dispatch(switchPlayer());
+        setTextValue("");
+        return;
+      case "/right":
+        dispatch(moveRight());
+        dispatch(switchPlayer());
+        setTextValue("");
+        return;
+    }
+
     dispatch(createMessage(textValue));
   };
 
@@ -27,7 +58,9 @@ export const Chat = () => {
   return (
     <div className="container-chat">
       {messages.map((message: MessageType) => (
-        <p>{message.text}</p>
+        <p>
+          {currentUser}: {message.text}
+        </p>
       ))}
       <form
         onSubmit={(e) => {
@@ -36,7 +69,7 @@ export const Chat = () => {
       >
         <input
           value={textValue}
-          onChange={(e) => setTextValu(e.target.value)}
+          onChange={(e) => setTextValue(e.target.value)}
         />
         <button className="button-app">Send</button>
       </form>
