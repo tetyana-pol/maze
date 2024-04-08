@@ -1,9 +1,23 @@
-.button-app:hover {
-  cursor: pointer;
-}
-
 .container {
   display: flex;
   padding-left: 40px;
   padding-top: 40px;
+}
+
+button {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-shadow: 3px 3px 5px #ccc;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-shadow: 3px 3px 5px #ccc;
+  border-radius: 5px;
 }

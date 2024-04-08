@@ -42,12 +42,13 @@ export const WaitingList = () => {
           }}
         >
           <input
+            type="text"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             required
           />
           <button className="button-app" type="submit">
-            Type user name
+            Send
           </button>
         </form>
       )}

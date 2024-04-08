@@ -27,7 +27,7 @@ export const User = () => {
           onChange={(e) => setUser(e.target.value)}
           required
         />
-        <button type="submit">Type user name</button>
+        <button type="submit">Send</button>
       </form>
     </div>
   );

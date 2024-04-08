@@ -3,7 +3,6 @@ import cn from "classnames";
 
 interface Props {
   element: string;
-
   player: string;
 }
 

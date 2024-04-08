@@ -8,16 +8,16 @@ import { CreateUserDto } from './dto/createUserDto';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly messageRepo: Repository<User>,
+    private readonly userRepo: Repository<User>,
   ) {}
 
   async findAll() {
-    return await this.messageRepo.find();
+    return await this.userRepo.find();
   }
 
-  async create(createMessageDto: CreateUserDto) {
-    const message = this.messageRepo.create(createMessageDto);
-    await this.messageRepo.save(message);
-    return message;
+  async create(createUserDto: CreateUserDto) {
+    const user = this.userRepo.create(createUserDto);
+    await this.userRepo.save(user);
+    return user;
   }
 }

@@ -3,8 +3,6 @@ import { RootState } from "../app/store";
 import { CoordType } from "../../types/Coord";
 import { maze } from "../../components/Maze/maze.template";
 
-const lengthMaze = maze.length;
-
 const checkForWall = (x: number, y: number) =>
   x === -1 ||
   y === -1 ||
@@ -37,24 +35,12 @@ export const playersSlice = createSlice({
 
       const newPositionX = currentPositionX - 1;
 
-      console.log({ newPositionX, currentPositionY });
-
       if (checkForWall(newPositionX, currentPositionY)) {
         console.log(`${state.currentPlayer} hit the wall`);
         return;
       }
 
       state[state.currentPlayer].positionX = newPositionX;
-
-      /* if (state.currentPlayer === "playerOne") {
-        if (state.playerOne.positionX - 1 >= 0) {
-          state.playerOne.positionX = state.playerOne.positionX - 1;
-        }
-      } else {
-        if (state.playerTwo.positionX - 1 >= 0) {
-          state.playerTwo.positionX = state.playerTwo.positionX - 1;
-        }
-      } */
     },
 
     moveRight: (state) => {
@@ -64,24 +50,12 @@ export const playersSlice = createSlice({
 
       const newPositionX = currentPositionX + 1;
 
-      console.log({ newPositionX, currentPositionY });
-
       if (checkForWall(newPositionX, currentPositionY)) {
         console.log(`${state.currentPlayer} hit the wall`);
         return;
       }
 
       state[state.currentPlayer].positionX = newPositionX;
-
-      /* if (state.currentPlayer === "playerOne") {
-        if (state.playerOne.positionX + 1 < lengthMaze) {
-          state.playerOne.positionX = state.playerOne.positionX + 1;
-        }
-      } else {
-        if (state.playerTwo.positionX + 1 < lengthMaze) {
-          state.playerTwo.positionX = state.playerTwo.positionX + 1;
-        }
-      } */
     },
 
     moveUp: (state) => {
@@ -91,24 +65,12 @@ export const playersSlice = createSlice({
 
       const newPositionY = currentPositionY - 1;
 
-      console.log({ currentPositionX, currentPositionY });
-
       if (checkForWall(currentPositionX, newPositionY)) {
         console.log(`${state.currentPlayer} hit the wall`);
         return;
       }
 
       state[state.currentPlayer].positionY = newPositionY;
-
-      /* if (state.currentPlayer === "playerOne") {
-        if (state.playerOne.positionY - 1 >= 0) {
-          state.playerOne.positionY = state.playerOne.positionY - 1;
-        }
-      } else {
-        if (state.playerTwo.positionY - 1 >= 0) {
-          state.playerTwo.positionY = state.playerTwo.positionY - 1;
-        }
-      } */
     },
 
     moveDown: (state) => {
@@ -126,16 +88,6 @@ export const playersSlice = createSlice({
       }
 
       state[state.currentPlayer].positionY = newPositionY;
-
-      /* if (state.currentPlayer === "playerOne") {
-        if (state.playerOne.positionY + 1 < lengthMaze) {
-          state.playerOne.positionY = state.playerOne.positionY + 1;
-        }
-      } else {
-        if (state.playerTwo.positionY + 1 < lengthMaze) {
-          state.playerTwo.positionY = state.playerTwo.positionY + 1;
-        }
-      } */
     },
 
     switchPlayer: (state) => {

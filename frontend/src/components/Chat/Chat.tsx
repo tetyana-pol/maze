@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
-import { chatSelector } from "../../store/features/chatSlice";
+import { addMessage, chatSelector } from "../../store/features/chatSlice";
 import { usersSelector } from "../../store/features/usersSlice";
 import "./chat.scss";
-import { getMessages, createMessage } from "../../store/features/chatSlice";
 import {
   moveLeft,
   moveRight,
@@ -10,8 +9,9 @@ import {
   moveDown,
   switchPlayer,
 } from "../../store/features/playersSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MessageType } from "../../types/Message";
+import { nextNumber } from "../../services/services";
 
 export const Chat = () => {
   const [textValue, setTextValue] = useState("");
@@ -29,35 +29,64 @@ export const Chat = () => {
       case "/up":
         dispatch(moveUp());
         dispatch(switchPlayer());
-        dispatch(createMessage(textValue));
+        dispatch(
+          addMessage({
+            id: nextNumber(messages.map((el) => el.id)),
+            text: textValue,
+            created_at: new Date().toISOString(),
+          })
+        );
         setTextValue("");
         return;
       case "/down":
         dispatch(moveDown());
         dispatch(switchPlayer());
-        dispatch(createMessage(textValue));
+        dispatch(
+          addMessage({
+            id: nextNumber(messages.map((el) => el.id)),
+            text: textValue,
+            created_at: new Date().toISOString(),
+          })
+        );
         setTextValue("");
         return;
       case "/left":
         dispatch(moveLeft());
         dispatch(switchPlayer());
-        dispatch(createMessage(textValue));
+        dispatch(
+          addMessage({
+            id: nextNumber(messages.map((el) => el.id)),
+            text: textValue,
+            created_at: new Date().toISOString(),
+          })
+        );
         setTextValue("");
         return;
       case "/right":
         dispatch(moveRight());
         dispatch(switchPlayer());
-        dispatch(createMessage(textValue));
+        dispatch(
+          addMessage({
+            id: nextNumber(messages.map((el) => el.id)),
+            text: textValue,
+            created_at: new Date().toISOString(),
+          })
+        );
         setTextValue("");
         return;
     }
 
-    dispatch(createMessage(currentUser + ": " + textValue));
+    dispatch(
+      addMessage({
+        id: nextNumber(messages.map((el) => el.id)),
+        text: `${currentUser} :  ${textValue}`,
+        created_at: new Date().toISOString(),
+      })
+    );
+    setTextValue("");
   };
 
-  useEffect(() => {
-    dispatch(getMessages());
-  }, []);
+  console.log(messages);
 
   return (
     <div className="container-chat">

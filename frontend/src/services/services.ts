@@ -1,3 +1,3 @@
 export const nextNumber = (arr: number[]) => {
-  return Math.max(...arr) + 1;
+  return arr.length > 0 ? Math.max(...arr) + 1 : 1;
 };
