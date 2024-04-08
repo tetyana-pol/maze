@@ -1,13 +1,13 @@
 import { useAppSelector } from "../../store/app/hooks";
-import { playersSelector } from "../../store/features/playersSlice";
+import { usersSelector } from "../../store/features/usersSlice";
 import "./indicator.scss";
 
 export const Indicator = () => {
-  const { currentPlayer } = useAppSelector(playersSelector);
+  const { currentUser } = useAppSelector(usersSelector);
 
   return (
     <h3 className="indicator">
-      <strong>Now is turn {currentPlayer}</strong>
+      <strong>Now is turn {currentUser}</strong>
     </h3>
   );
 };

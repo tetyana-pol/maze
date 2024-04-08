@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { chatSelector } from "../../store/features/chatSlice";
-import { playersSelector } from "../../store/features/playersSlice";
+import { usersSelector } from "../../store/features/usersSlice";
 import "./chat.scss";
 import { getMessages, createMessage } from "../../store/features/chatSlice";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import { MessageType } from "../../types/Message";
 export const Chat = () => {
   const [textValue, setTextValu] = useState("");
 
-  const { currentPlayer } = useAppSelector(playersSelector);
+  const { currentUser } = useAppSelector(usersSelector);
 
   const { messages } = useAppSelector(chatSelector);
 

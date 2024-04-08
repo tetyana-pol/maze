@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppDispatch } from "../../store/app/hooks";
 
 import "./user.scss";
-import { addUserOne } from "../../store/features/usersSlice";
+import { addUserOne, setCurrentUser } from "../../store/features/usersSlice";
 
 export const User = () => {
   const [user, setUser] = useState("");
@@ -13,6 +13,7 @@ export const User = () => {
     e.preventDefault();
 
     dispatch(addUserOne(user));
+    dispatch(setCurrentUser());
     setUser("");
   };
 
