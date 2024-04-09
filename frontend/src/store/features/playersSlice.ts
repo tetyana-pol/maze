@@ -55,7 +55,7 @@ export const playersSlice = createSlice({
           state[state.currentPlayer].positionX
         ] === "er"
       ) {
-        console.log(state.currentPlayer, "has won");
+        console.log(state.currentPlayer + "has won");
         return;
       }
 

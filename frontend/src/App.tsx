@@ -1,6 +1,6 @@
 import "./App.css";
 import { Maze } from "./components/Maze";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./store/app/hooks";
 import {
   moveLeft,
@@ -19,8 +19,8 @@ const App = () => {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    document.addEventListener("keydown", function (event) {
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent) => {
       switch (event.key) {
         case "ArrowLeft":
           dispatch(moveLeft());
@@ -42,8 +42,15 @@ const App = () => {
           dispatch(switchPlayer());
           break;
       }
-    });
-  }, []);
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [onKeyDown]);
 
   return (
     <>

@@ -1,7 +1,12 @@
-.indicator {
-  text-align: center;
+.indicator_content {
+  display: flex;
+  align-items: center;
+  justify-content: start;
 
-  strong {
-    color: #660000;
+  color: #660000;
+
+  .player {
+    margin-left: 16px;
+    margin-right: 8px;
   }
 }

@@ -9,9 +9,18 @@ export const Indicator = () => {
 
   return (
     <h3 className="indicator">
-      <strong>
-        Now is turn {currentPlayer === "playerOne" ? userOne : userTwo}
-      </strong>
+      <div className="indicator_content">
+        Now is turn{" "}
+        {currentPlayer === "playerOne" ? (
+          <>
+            <div className="player-one player" /> {userOne}
+          </>
+        ) : (
+          <>
+            <div className="player-two player" /> {userTwo}
+          </>
+        )}
+      </div>
     </h3>
   );
 };
