@@ -10,12 +10,12 @@ export const Cell: React.FC<Props> = ({ element, player }) => {
   return (
     <div
       className={cn({
-        cell: element === "c" || element === "e",
+        cell: element === "c",
         wall: element === "w",
+        exitr: element === "er",
       })}
     >
       {player !== "none" && <div className={player}></div>}
-      {element === "e" && "E"}
     </div>
   );
 };

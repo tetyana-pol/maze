@@ -86,8 +86,6 @@ export const Chat = () => {
     setTextValue("");
   };
 
-  console.log(messages);
-
   return (
     <div className="container-chat">
       {messages.map((message: MessageType) => (

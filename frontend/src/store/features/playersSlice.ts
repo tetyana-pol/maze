@@ -50,6 +50,15 @@ export const playersSlice = createSlice({
 
       const newPositionX = currentPositionX + 1;
 
+      if (
+        maze[state[state.currentPlayer].positionY][
+          state[state.currentPlayer].positionX
+        ] === "er"
+      ) {
+        console.log(state.currentPlayer, "has won");
+        return;
+      }
+
       if (checkForWall(newPositionX, currentPositionY)) {
         console.log(`${state.currentPlayer} hit the wall`);
         return;
