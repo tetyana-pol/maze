@@ -2,9 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
 import { CoordType } from "../../types/Coord";
 import { maze } from "../../components/Maze/maze.template";
-import { addMessage, chatSelector } from "../../store/features/chatSlice";
-import { usersSelector } from "../../store/features/usersSlice";
-import { useAppSelector } from "../app/hooks";
 
 const checkForWall = (x: number, y: number) =>
   x === -1 ||
@@ -34,15 +31,15 @@ export type PlayersState = {
   playerOne: CoordType;
   playerTwo: CoordType;
   currentPlayer: "playerOne" | "playerTwo";
-  gameIsRunning: boolean;
+
   winner: "playerOne" | "playerTwo" | "";
 };
 
 const initialState: PlayersState = {
-  playerOne: { positionX: 6, positionY: 2 },
+  playerOne: { positionX: 5, positionY: 7 },
   playerTwo: { positionX: 0, positionY: 0 },
   currentPlayer: "playerOne",
-  gameIsRunning: true,
+
   winner: "",
 };
 
@@ -51,7 +48,7 @@ export const playersSlice = createSlice({
   initialState,
   reducers: {
     moveLeft: (state) => {
-      if (!state.gameIsRunning) {
+      if (state.winner) {
         return;
       }
       const currentPositionX = state[state.currentPlayer].positionX;
@@ -61,6 +58,7 @@ export const playersSlice = createSlice({
       const newPositionX = currentPositionX - 1;
 
       if (checkForExit(state[state.currentPlayer], "left")) {
+        state.winner = state.currentPlayer;
         console.log(state.currentPlayer + "has won");
         return;
       }
@@ -73,7 +71,7 @@ export const playersSlice = createSlice({
       state[state.currentPlayer].positionX = newPositionX;
     },
     moveRight: (state) => {
-      if (!state.gameIsRunning) {
+      if (state.winner) {
         return;
       }
       const currentPositionX = state[state.currentPlayer].positionX;
@@ -83,6 +81,8 @@ export const playersSlice = createSlice({
       const newPositionX = currentPositionX + 1;
 
       if (checkForExit(state[state.currentPlayer], "right")) {
+        state.winner = state.currentPlayer;
+
         console.log(state.currentPlayer + "has won");
         return;
       }
@@ -96,7 +96,7 @@ export const playersSlice = createSlice({
     },
 
     moveUp: (state) => {
-      if (!state.gameIsRunning) {
+      if (state.winner) {
         return;
       }
       const currentPositionX = state[state.currentPlayer].positionX;
@@ -106,6 +106,8 @@ export const playersSlice = createSlice({
       const newPositionY = currentPositionY - 1;
 
       if (checkForExit(state[state.currentPlayer], "up")) {
+        state.winner = state.currentPlayer;
+
         console.log(state.currentPlayer + "has won");
         return;
       }
@@ -119,7 +121,7 @@ export const playersSlice = createSlice({
     },
 
     moveDown: (state) => {
-      if (!state.gameIsRunning) {
+      if (state.winner) {
         return;
       }
       const currentPositionX = state[state.currentPlayer].positionX;
@@ -128,9 +130,9 @@ export const playersSlice = createSlice({
 
       const newPositionY = currentPositionY + 1;
 
-      console.log({ currentPositionX, currentPositionY });
-
       if (checkForExit(state[state.currentPlayer], "down")) {
+        state.winner = state.currentPlayer;
+
         console.log(state.currentPlayer + "has won");
         return;
       }

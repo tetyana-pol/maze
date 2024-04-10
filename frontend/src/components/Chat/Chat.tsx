@@ -21,12 +21,13 @@ export const Chat = () => {
 
   const { messages } = useAppSelector(chatSelector);
 
-  const { winner, gameIsRunning } = useAppSelector(playersSelector);
+  const { winner } = useAppSelector(playersSelector);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!winner || gameIsRunning) return;
+    if (!winner) return;
+    console.log("useeffec winner");
     dispatch(
       addMessage({
         id: nextNumber(messages.map((el) => el.id)),
@@ -34,7 +35,7 @@ export const Chat = () => {
         created_at: new Date().toISOString(),
       })
     );
-  }, [dispatch, gameIsRunning, messages, userOne, userTwo, winner]);
+  }, [winner]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
