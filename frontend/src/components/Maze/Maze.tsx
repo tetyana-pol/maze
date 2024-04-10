@@ -14,6 +14,10 @@ export const Maze = () => {
           </div>
         );
       })}
+      <div className="maze_buttons">
+        <button>Give up</button>
+        <button disabled={true}>Exit</button>
+      </div>
     </div>
   );
 };

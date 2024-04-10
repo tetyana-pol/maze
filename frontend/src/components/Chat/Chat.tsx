@@ -8,19 +8,33 @@ import {
   moveUp,
   moveDown,
   switchPlayer,
+  playersSelector,
 } from "../../store/features/playersSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MessageType } from "../../types/Message";
 import { nextNumber } from "../../services/services";
 
 export const Chat = () => {
   const [textValue, setTextValue] = useState("");
 
-  const { currentUser } = useAppSelector(usersSelector);
+  const { currentUser, userOne, userTwo } = useAppSelector(usersSelector);
 
   const { messages } = useAppSelector(chatSelector);
 
+  const { winner, gameIsRunning } = useAppSelector(playersSelector);
+
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!winner || gameIsRunning) return;
+    dispatch(
+      addMessage({
+        id: nextNumber(messages.map((el) => el.id)),
+        text: `${winner === "playerOne" ? userOne : userTwo} has won`,
+        created_at: new Date().toISOString(),
+      })
+    );
+  }, [dispatch, gameIsRunning, messages, userOne, userTwo, winner]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
