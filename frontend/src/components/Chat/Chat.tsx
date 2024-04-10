@@ -27,7 +27,6 @@ export const Chat = () => {
 
   useEffect(() => {
     if (!winner) return;
-    console.log("useeffec winner");
     dispatch(
       addMessage({
         id: nextNumber(messages.map((el) => el.id)),
@@ -47,7 +46,7 @@ export const Chat = () => {
         dispatch(
           addMessage({
             id: nextNumber(messages.map((el) => el.id)),
-            text: textValue,
+            text: "(going up)",
             created_at: new Date().toISOString(),
           })
         );
@@ -59,7 +58,7 @@ export const Chat = () => {
         dispatch(
           addMessage({
             id: nextNumber(messages.map((el) => el.id)),
-            text: textValue,
+            text: "(going down)",
             created_at: new Date().toISOString(),
           })
         );
@@ -71,7 +70,7 @@ export const Chat = () => {
         dispatch(
           addMessage({
             id: nextNumber(messages.map((el) => el.id)),
-            text: textValue,
+            text: "(going left)",
             created_at: new Date().toISOString(),
           })
         );
@@ -83,7 +82,7 @@ export const Chat = () => {
         dispatch(
           addMessage({
             id: nextNumber(messages.map((el) => el.id)),
-            text: textValue,
+            text: "(going right)",
             created_at: new Date().toISOString(),
           })
         );

@@ -59,7 +59,7 @@ export const playersSlice = createSlice({
 
       if (checkForExit(state[state.currentPlayer], "left")) {
         state.winner = state.currentPlayer;
-        console.log(state.currentPlayer + "has won");
+        console.log(state.currentPlayer + " has won");
         return;
       }
 
@@ -146,6 +146,9 @@ export const playersSlice = createSlice({
     },
 
     switchPlayer: (state) => {
+      if (state.winner) {
+        return;
+      }
       if (state.currentPlayer === "playerOne") {
         state.currentPlayer = "playerTwo";
       } else {
