@@ -36,7 +36,7 @@ export type PlayersState = {
 };
 
 const initialState: PlayersState = {
-  playerOne: { positionX: 5, positionY: 7 },
+  playerOne: { positionX: 6, positionY: 2 },
   playerTwo: { positionX: 0, positionY: 0 },
   currentPlayer: "playerOne",
 
