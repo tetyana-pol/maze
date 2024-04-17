@@ -5,14 +5,17 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('hmessages')
-export class Message {
+@Entity('hlists')
+export class List {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ nullable: false })
-  text: string;
+  initializer: string;
+
+  @Column({ nullable: false })
+  game: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  date_at: Date;
 }

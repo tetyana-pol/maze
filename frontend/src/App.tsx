@@ -75,7 +75,7 @@ const App = () => {
           break;
       }
     },
-    [dispatch]
+    [dispatch, messages]
   );
 
   useEffect(() => {

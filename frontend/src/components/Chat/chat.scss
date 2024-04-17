@@ -2,4 +2,25 @@
   width: 35%;
   margin-top: 40px;
   padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding-bottom: 92px;
+}
+
+.chat_messages {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.chat_message {
+  display: flex;
+
+  &-date {
+    width: 20%;
+  }
+
+  &-text {
+    padding-left: 5px;
+  }
 }

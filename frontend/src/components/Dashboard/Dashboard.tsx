@@ -2,10 +2,13 @@ import { useAppDispatch, useAppSelector } from "../../store/app/hooks";
 import { usersSelector } from "../../store/features/usersSlice";
 import { WaitingList } from "../WaitingList";
 import "./dashboard.scss";
-import { addList, listsSelector } from "../../store/features/listsSlice";
-import { useState } from "react";
+import {
+  getLists,
+  createList,
+  listsSelector,
+} from "../../store/features/listsSlice";
+import { useEffect, useState } from "react";
 import { ListType } from "../../types/List";
-import { nextNumber } from "../../services/services";
 
 export const Dashbord = () => {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -15,12 +18,16 @@ export const Dashbord = () => {
 
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(getLists());
+  }, [dispatch]);
+
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     dispatch(
-      addList({
-        id: nextNumber(lists.map((el: ListType) => el.id)),
+      createList({
         initializer: userOne,
-        date: new Date().toISOString(),
+        game: "maze",
+        date_at: new Date().toISOString(),
       })
     );
     setIsDisabled(true);
@@ -30,7 +37,9 @@ export const Dashbord = () => {
     const milliDiff: number =
       new Date().getTime() -
       new Date(
-        lists.filter((list: ListType) => list.initializer === userOne)[0].date
+        lists.filter(
+          (list: ListType) => list.initializer === userOne
+        )[0].date_at
       ).getTime();
     const totalSeconds = Math.floor(milliDiff / 1000);
     const totalMinutes = Math.floor(totalSeconds / 60);

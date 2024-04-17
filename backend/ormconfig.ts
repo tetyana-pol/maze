@@ -1,4 +1,4 @@
-import { Message } from 'src/entities/message.entity';
+import { List } from 'src/entities/list.entity';
 
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
@@ -8,7 +8,7 @@ const config: PostgresConnectionOptions = {
   host: 'localhost',
   username: 'postgres',
   password: 'matedata',
-  entities: [Message],
+  entities: [List],
   synchronize: true,
 };
 

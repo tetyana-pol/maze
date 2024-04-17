@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MessageModule } from './message/message.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
+import { ListModule } from './list/list.module';
 import config from 'ormconfig';
 
 @Module({
-  imports: [MessageModule, TypeOrmModule.forRoot(config), UserModule],
+  imports: [TypeOrmModule.forRoot(config), ListModule],
   controllers: [AppController],
   providers: [AppService],
 })

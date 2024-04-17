@@ -10,12 +10,14 @@ import {
   switchPlayer,
   playersSelector,
 } from "../../store/features/playersSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MessageType } from "../../types/Message";
 import { nextNumber } from "../../services/services";
+import dayjs from "dayjs";
 
 export const Chat = () => {
   const [textValue, setTextValue] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
 
   const { currentUser, userOne, userTwo } = useAppSelector(usersSelector);
 
@@ -35,6 +37,12 @@ export const Chat = () => {
       })
     );
   }, [winner]);
+
+  useEffect(() => {
+    if (messages.length && ref.current) {
+      ref.current.scrollTop = Number.MAX_SAFE_INTEGER;
+    }
+  }, [messages.length]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -102,9 +110,17 @@ export const Chat = () => {
 
   return (
     <div className="container-chat">
-      {messages.map((message: MessageType) => (
-        <p key={message.id}>{message.text}</p>
-      ))}
+      <div ref={ref} className="chat_messages">
+        {messages.map((message: MessageType) => (
+          <div key={message.id} className="chat_message">
+            <div className="chat_message-date">
+              {dayjs(message.created_at).format("hh:mm:ss")}
+            </div>
+            <div className="chat_message-text">{message.text}</div>
+          </div>
+        ))}
+      </div>
+
       <form
         onSubmit={(e) => {
           handleSubmit(e);

@@ -1,5 +1,6 @@
 export interface ListType {
   id: number;
   initializer: string;
-  date: string;
+  game: string;
+  date_at: string;
 }
