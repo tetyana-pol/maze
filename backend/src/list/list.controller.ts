@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ListService } from './list.service';
 import { CreateListDto } from './dto/createListDto';
 
@@ -14,5 +14,11 @@ export class ListController {
   @Post()
   create(@Body() createMessageDto: CreateListDto) {
     return this.listService.create(createMessageDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    console.log('controller', id);
+    return this.listService.remove(Number(id));
   }
 }

@@ -5,10 +5,12 @@ import { getAll, create } from "../api/apiList";
 
 export type ListsState = {
   lists: ListType[];
+  activeListId: number;
 };
 
 const initialState: ListsState = {
   lists: [],
+  activeListId: 0,
 };
 
 export const getLists = createAsyncThunk("lists/fetch", async () => {
@@ -29,6 +31,10 @@ export const listsSlice = createSlice({
     addList: (state, action: PayloadAction<ListType>) => {
       state.lists.push(action.payload);
     },
+    setActiveListId: (state, action: PayloadAction<number>) => {
+      console.log("setactive", action.payload);
+      state.activeListId = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createList.fulfilled, (state, action) => {
@@ -42,6 +48,6 @@ export const listsSlice = createSlice({
 });
 
 export const listsSelector = (state: RootState) => state.lists;
-export const { addList } = listsSlice.actions;
+export const { addList, setActiveListId } = listsSlice.actions;
 
 export default listsSlice.reducer;

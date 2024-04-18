@@ -20,4 +20,9 @@ export class ListService {
     await this.listRepo.save(item);
     return item;
   }
+
+  async remove(id: number) {
+    console.log('service', id);
+    return await this.listRepo.delete({ id });
+  }
 }

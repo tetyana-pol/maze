@@ -3,6 +3,7 @@ import { listsSelector } from "../../store/features/listsSlice";
 import { ListType } from "../../types/List";
 import "./waiting.scss";
 import { addUserTwo } from "../../store/features/usersSlice";
+import { setActiveListId } from "../../store/features/listsSlice";
 import { useState } from "react";
 
 export const WaitingList = () => {
@@ -22,13 +23,16 @@ export const WaitingList = () => {
     <h3 className="message">
       <ul>
         {lists?.map((list: ListType) => (
-          <li key={list.initializer}>
+          <li key={list.id}>
             <span className="waiting_item">{list.initializer}</span>
             <span className="waiting_item">{list.date_at}</span>
             <button
               type="button"
               className="button-app"
-              onClick={() => setIsFormVisible(true)}
+              onClick={(e) => {
+                dispatch(setActiveListId(list.id));
+                setIsFormVisible(true);
+              }}
             >
               Join game
             </button>

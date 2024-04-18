@@ -8,13 +8,16 @@ import {
   moveUp,
   moveDown,
   switchPlayer,
+  playersSelector,
 } from "./store/features/playersSlice";
 import { Chat } from "./components/Chat";
 import { usersSelector } from "./store/features/usersSlice";
 import { User } from "./components/User";
 import { Dashbord } from "./components/Dashboard";
 import { addMessage, chatSelector } from "./store/features/chatSlice";
+import { remove } from "./store/api/apiList";
 import { nextNumber } from "./services/services";
+import { listsSelector } from "./store/features/listsSlice";
 
 const App = () => {
   const { userOne, userTwo } = useAppSelector(usersSelector);
@@ -22,6 +25,8 @@ const App = () => {
   const dispatch = useAppDispatch();
 
   const { messages } = useAppSelector(chatSelector);
+  const { activeListId } = useAppSelector(listsSelector);
+  const { winner } = useAppSelector(playersSelector);
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -83,6 +88,12 @@ const App = () => {
 
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [onKeyDown]);
+
+  useEffect(() => {
+    if (winner) {
+      remove(activeListId);
+    }
+  });
 
   return (
     <>

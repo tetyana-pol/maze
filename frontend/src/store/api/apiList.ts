@@ -8,3 +8,7 @@ export const create = (data: Omit<ListType, "id">) => {
 export const getAll = () => {
   return client.get<ListType[]>("/list");
 };
+
+export const remove = (id: number) => {
+  return client.delete(`/list/${id}`);
+};
