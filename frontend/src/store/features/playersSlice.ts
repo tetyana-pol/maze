@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
 import { CoordType } from "../../types/Coord";
 import { maze } from "../../components/Maze/maze.template";
@@ -31,7 +31,6 @@ export type PlayersState = {
   playerOne: CoordType;
   playerTwo: CoordType;
   currentPlayer: "playerOne" | "playerTwo";
-
   winner: "playerOne" | "playerTwo" | "";
 };
 
@@ -155,10 +154,23 @@ export const playersSlice = createSlice({
         state.currentPlayer = "playerOne";
       }
     },
+
+    setWinner: (
+      state,
+      action: PayloadAction<"playerOne" | "playerTwo" | "">
+    ) => {
+      state.winner = action.payload;
+    },
   },
 });
 
-export const { moveLeft, moveRight, moveUp, moveDown, switchPlayer } =
-  playersSlice.actions;
+export const {
+  moveLeft,
+  moveRight,
+  moveUp,
+  moveDown,
+  switchPlayer,
+  setWinner,
+} = playersSlice.actions;
 export const playersSelector = (state: RootState) => state.players;
 export default playersSlice.reducer;

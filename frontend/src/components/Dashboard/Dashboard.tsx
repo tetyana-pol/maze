@@ -9,6 +9,8 @@ import {
 } from "../../store/features/listsSlice";
 import { useEffect, useState } from "react";
 import { ListType } from "../../types/List";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 export const Dashbord = () => {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -17,6 +19,8 @@ export const Dashbord = () => {
   const { lists } = useAppSelector(listsSelector);
 
   const dispatch = useAppDispatch();
+
+  dayjs.extend(relativeTime);
 
   useEffect(() => {
     dispatch(getLists());
@@ -33,29 +37,12 @@ export const Dashbord = () => {
     setIsDisabled(true);
   };
 
-  const getDiff = () => {
-    const milliDiff: number =
-      new Date().getTime() -
-      new Date(
-        lists.filter(
-          (list: ListType) => list.initializer === userOne
-        )[0].date_at
-      ).getTime();
-    const totalSeconds = Math.floor(milliDiff / 1000);
-    const totalMinutes = Math.floor(totalSeconds / 60);
-    const totalHours = Math.floor(totalMinutes / 60);
-    const remSeconds = totalSeconds % 60;
-    const remMinutes = totalMinutes % 60;
-
-    return `${totalHours} h ${remMinutes} min ${remSeconds} sec `;
-  };
-
   return (
     <div className="dashboard">
       <h3 className="message">
         <strong>Hello {userOne}</strong>
       </h3>
-      <div>Waiting list</div>
+      <h2>Waiting list</h2>
       <WaitingList />
       <button
         className="button-app"
@@ -69,7 +56,10 @@ export const Dashbord = () => {
       </button>
       {isDisabled && (
         <p>
-          You started a new game {getDiff()}
+          You started a new game{" "}
+          {dayjs(
+            lists.filter((el) => el.initializer === userOne)[0]?.date_at
+          ).fromNow(true)}{" "}
           ago. Waiting for a second player…
         </p>
       )}

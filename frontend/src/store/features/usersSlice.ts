@@ -37,10 +37,19 @@ export const usersSlice = createSlice({
         state.currentUser = state.userOne;
       }
     },
+
+    deleteUserTwo: (state) => {
+      state.userTwo = "";
+    },
   },
 });
 
 export const usersSelector = (state: RootState) => state.users;
-export const { addUserOne, addUserTwo, setCurrentUser, switchUser } =
-  usersSlice.actions;
+export const {
+  addUserOne,
+  addUserTwo,
+  setCurrentUser,
+  switchUser,
+  deleteUserTwo,
+} = usersSlice.actions;
 export default usersSlice.reducer;

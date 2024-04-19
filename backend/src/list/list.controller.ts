@@ -18,7 +18,6 @@ export class ListController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    console.log('controller', id);
     return this.listService.remove(Number(id));
   }
 }

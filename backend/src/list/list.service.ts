@@ -22,7 +22,6 @@ export class ListService {
   }
 
   async remove(id: number) {
-    console.log('service', id);
     return await this.listRepo.delete({ id });
   }
 }

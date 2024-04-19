@@ -5,6 +5,7 @@ import "./waiting.scss";
 import { addUserTwo } from "../../store/features/usersSlice";
 import { setActiveListId } from "../../store/features/listsSlice";
 import { useState } from "react";
+import dayjs from "dayjs";
 
 export const WaitingList = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -25,11 +26,13 @@ export const WaitingList = () => {
         {lists?.map((list: ListType) => (
           <li key={list.id}>
             <span className="waiting_item">{list.initializer}</span>
-            <span className="waiting_item">{list.date_at}</span>
+            <span className="waiting_item">
+              {dayjs(list.date_at).format("DD/MM/YYYY")}
+            </span>
             <button
               type="button"
               className="button-app"
-              onClick={(e) => {
+              onClick={() => {
                 dispatch(setActiveListId(list.id));
                 setIsFormVisible(true);
               }}
