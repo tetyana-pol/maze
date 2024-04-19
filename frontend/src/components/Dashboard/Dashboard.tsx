@@ -8,7 +8,6 @@ import {
   listsSelector,
 } from "../../store/features/listsSlice";
 import { useEffect, useState } from "react";
-import { ListType } from "../../types/List";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 

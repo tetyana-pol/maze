@@ -32,6 +32,7 @@ const App = () => {
     (event: KeyboardEvent) => {
       switch (event.key) {
         case "ArrowLeft":
+          if (winner) return;
           dispatch(moveLeft());
           dispatch(switchPlayer());
           dispatch(
@@ -44,6 +45,7 @@ const App = () => {
           break;
 
         case "ArrowRight":
+          if (winner) return;
           dispatch(moveRight());
           dispatch(switchPlayer());
           dispatch(
@@ -56,6 +58,7 @@ const App = () => {
           break;
 
         case "ArrowDown":
+          if (winner) return;
           dispatch(moveDown());
           dispatch(switchPlayer());
           dispatch(
@@ -68,6 +71,7 @@ const App = () => {
           break;
 
         case "ArrowUp":
+          if (winner) return;
           dispatch(moveUp());
           dispatch(switchPlayer());
           dispatch(

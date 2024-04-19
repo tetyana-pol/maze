@@ -49,6 +49,7 @@ export const Chat = () => {
 
     switch (textValue) {
       case "/up":
+        if (winner) return;
         dispatch(moveUp());
         dispatch(switchPlayer());
         dispatch(
@@ -61,6 +62,7 @@ export const Chat = () => {
         setTextValue("");
         return;
       case "/down":
+        if (winner) return;
         dispatch(moveDown());
         dispatch(switchPlayer());
         dispatch(
@@ -73,6 +75,7 @@ export const Chat = () => {
         setTextValue("");
         return;
       case "/left":
+        if (winner) return;
         dispatch(moveLeft());
         dispatch(switchPlayer());
         dispatch(
@@ -85,6 +88,7 @@ export const Chat = () => {
         setTextValue("");
         return;
       case "/right":
+        if (winner) return;
         dispatch(moveRight());
         dispatch(switchPlayer());
         dispatch(
