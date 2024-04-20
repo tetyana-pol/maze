@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
-import { create } from "../api/apiUser";
 
 export type UsersState = {
   userOne: string;
@@ -38,7 +37,8 @@ export const usersSlice = createSlice({
       }
     },
 
-    deleteUserTwo: (state) => {
+    deleteUsers: (state) => {
+      state.userOne = "";
       state.userTwo = "";
     },
   },
@@ -50,6 +50,6 @@ export const {
   addUserTwo,
   setCurrentUser,
   switchUser,
-  deleteUserTwo,
+  deleteUsers,
 } = usersSlice.actions;
 export default usersSlice.reducer;

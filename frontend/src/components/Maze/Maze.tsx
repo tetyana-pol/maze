@@ -2,13 +2,12 @@ import { Indicator } from "../Indicator";
 import { Row } from "../Row";
 import "./maze.scss";
 import { maze } from "./maze.template";
-import { setWinner } from "../../store/features/playersSlice";
-import { playersSelector } from "../../store/features/playersSlice";
+import { playersSelector, setWinner } from "../../store/features/playersSlice";
 import { chatSelector } from "../../store/features/chatSlice";
 import { usersSelector } from "../../store/features/usersSlice";
-import { addMessage } from "../../store/features/chatSlice";
+import { addMessage, cleanChat } from "../../store/features/chatSlice";
 import { useAppSelector, useAppDispatch } from "../../store/app/hooks";
-import { deleteUserTwo } from "../../store/features/usersSlice";
+import { deleteUsers } from "../../store/features/usersSlice";
 import { nextNumber } from "../../services/services";
 
 export const Maze = () => {
@@ -55,7 +54,9 @@ export const Maze = () => {
         <button
           disabled={!winner}
           onClick={() => {
-            dispatch(deleteUserTwo());
+            dispatch(deleteUsers());
+            dispatch(cleanChat());
+            dispatch(setWinner(""));
           }}
         >
           Exit

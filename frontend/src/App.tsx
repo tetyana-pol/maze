@@ -84,7 +84,7 @@ const App = () => {
           break;
       }
     },
-    [dispatch, messages]
+    [dispatch, messages, winner]
   );
 
   useEffect(() => {

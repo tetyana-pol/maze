@@ -17,10 +17,14 @@ export const chatSlice = createSlice({
     addMessage: (state, action: PayloadAction<MessageType>) => {
       state.messages.push(action.payload);
     },
+
+    cleanChat: (state) => {
+      state.messages = [];
+    },
   },
 });
 
 export const chatSelector = (state: RootState) => state.chat;
-export const { addMessage } = chatSlice.actions;
+export const { addMessage, cleanChat } = chatSlice.actions;
 
 export default chatSlice.reducer;
