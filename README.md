@@ -42,3 +42,10 @@ The “chat” consists of the log, message input field and a “send” button.
 Player should only be able to enter movement commands in their own turn.
 After one of the players reached the exit, the Player X has won! message should be shown in log, all further movement commands (but not the chat messages) should be ignored from both players, and the Exit button should become active.
 Give up button should only be shown if the game has not been finished. Upon pressing this button, the confirmation should be shown, and if confirmed, both player should get the Player X gave up message in the log, all further movement commands (but not the chat messages) should be ignored from both players, and the Exit button should become active.
+
+[DEMO LINK](https://maze-two-playears-app.netlify.app/)
+
+cd frontend  
+npm start  
+cd backend  
+npm run start:dev
